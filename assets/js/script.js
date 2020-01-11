@@ -1,38 +1,46 @@
 const inputTask = document.querySelector("#js-input-task");
 const btnAddTask = document.querySelector("#js-btn-add-task");
+const btnFilterAll = document.getElementById("js-filter-all");
+const btnFilterCompleted = document.getElementById("js-filter-completed");
 //const btnDeleteTask = document.querySelectorAll("button.btn-delete-task");
 //const inputCheckbox = document.querySelectorAll(".js-checkbox-task");
 
 //Function Add Task
 handleAddTodo = () => {
     const valueTask = inputTask.value;
-    const listTask = document.querySelector(".list-tasks");
-    const textInput = document.createElement("input");
-    textInput.setAttribute("class", "form-control value-task");
-    textInput.type = "text";
-    textInput.value = valueTask;
+    const messageError = document.querySelector(".message-error");
+    if (valueTask !== "") {
+        messageError.style.display = "none";
+        const listTask = document.querySelector(".list-tasks");
+        const textInput = document.createElement("input");
+        textInput.setAttribute("class", "form-control value-task");
+        textInput.type = "text";
+        textInput.value = valueTask;
 
-    const liElement = document.createElement("li");
-    liElement.setAttribute("class", "item-task align-items-center");
+        const liElement = document.createElement("li");
+        liElement.setAttribute("class", "item-task align-items-center");
 
-    const checkBoxElement = document.createElement('input');
-    checkBoxElement.setAttribute("class", "form-control js-checkbox-task");
-    checkBoxElement.setAttribute("onclick", "handleCheckTodo(this)");
-    checkBoxElement.type = "checkbox";
+        const checkBoxElement = document.createElement('input');
+        checkBoxElement.setAttribute("class", "form-control js-checkbox-task");
+        checkBoxElement.setAttribute("onclick", "handleCheckTodo(this)");
+        checkBoxElement.type = "checkbox";
 
-    const valueBtnDelete = document.createElement("i");
-    valueBtnDelete.setAttribute("class", "fas fa-trash");
-    const btnDeleteElement = document.createElement("button");
-    btnDeleteElement.appendChild(valueBtnDelete);
-    btnDeleteElement.setAttribute("class", "btn btn-danger btn-delete-task");
-    btnDeleteElement.setAttribute("onclick", "handleDeleteTodo(this)");
+        const valueBtnDelete = document.createElement("i");
+        valueBtnDelete.setAttribute("class", "fas fa-trash");
+        const btnDeleteElement = document.createElement("button");
+        btnDeleteElement.appendChild(valueBtnDelete);
+        btnDeleteElement.setAttribute("class", "btn btn-danger btn-delete-task");
+        btnDeleteElement.setAttribute("onclick", "handleDeleteTodo(this)");
 
-    liElement.appendChild(checkBoxElement);
-    liElement.appendChild(textInput);
-    liElement.appendChild(btnDeleteElement);
-    //listTask.appendChild(liElement);
-    handleDisplayTodo(listTask, liElement);
-    inputTask.value = "";
+        liElement.appendChild(checkBoxElement);
+        liElement.appendChild(textInput);
+        liElement.appendChild(btnDeleteElement);
+        //listTask.appendChild(liElement);
+        handleDisplayTodo(listTask, liElement);
+        inputTask.value = "";
+    } else {
+        messageError.style.display = "block";
+    }
 
 };
 
@@ -53,8 +61,27 @@ handleCheckTodo = inputCheckbox => {
 
 };
 
+//Function display task
 handleDisplayTodo = (parent, item) => {
     parent.appendChild(item);
+};
+
+//Function FilterAll
+handleFilterAll = () => {
+    const tasks = document.querySelectorAll(".value-task");
+    for (let i = 0; i < tasks.length; i++) {
+        tasks[i].parentNode.style.display = "flex";
+    }
+};
+
+//Function FilterCompleted
+handleFilterCompleted = () => {
+    const tasks = document.querySelectorAll(".value-task");
+    for (let i = 0; i < tasks.length; i++) {
+        if (!tasks[i].classList.contains("line-checkbox")) {
+            tasks[i].parentNode.style.display = "none";
+        }
+    }
 };
 
 
@@ -67,6 +94,12 @@ inputTask.addEventListener("keyup", event => {
         btnAddTask.click();
     }
 });
+
+//Click on filterAll
+btnFilterAll.addEventListener("click", handleFilterAll);
+
+//Click on filterCompleted
+btnFilterCompleted.addEventListener("click", handleFilterCompleted);
 
 //Click in deleteTask Button
 /*

@@ -7,6 +7,10 @@ body {
 .line-checkbox {
   text-decoration: line-through; }
 
+.message-error {
+  color: red;
+  display: none; }
+
 section#main {
   margin-top: 100px; }
   section#main .header h1 {
