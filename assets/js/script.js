@@ -79,6 +79,8 @@ handleFilterAll = () => {
     let count = 0;
     for (let i = 0; i < tasks.length; i++) {
         tasks[i].parentNode.style.display = "flex";
+        //Display button delete on item li
+        tasks[i].nextElementSibling.style.display = "block";
         count++
     }
     messageCount.innerHTML = `There is/are currently <span style='color:green;fontWeight:bold'>${count}</span> task(s) !`;
@@ -92,6 +94,8 @@ handleFilterCompleted = () => {
         if (!tasks[i].classList.contains("line-checkbox")) {
             tasks[i].parentNode.style.display = "none";
         } else {
+            //Hide button delete when filter completed
+            tasks[i].nextElementSibling.style.display = "none";
             count++;
         }
     }
