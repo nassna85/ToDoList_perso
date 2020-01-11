@@ -1,7 +1,9 @@
 const inputTask = document.querySelector("#js-input-task");
+const listTask = document.querySelector(".list-tasks");
 const btnAddTask = document.querySelector("#js-btn-add-task");
 const btnFilterAll = document.getElementById("js-filter-all");
 const btnFilterCompleted = document.getElementById("js-filter-completed");
+const messageCount = document.querySelector(".message-count");
 //const btnDeleteTask = document.querySelectorAll("button.btn-delete-task");
 //const inputCheckbox = document.querySelectorAll(".js-checkbox-task");
 
@@ -11,7 +13,7 @@ handleAddTodo = () => {
     const messageError = document.querySelector(".message-error");
     if (valueTask !== "") {
         messageError.style.display = "none";
-        const listTask = document.querySelector(".list-tasks");
+        //const listTask = document.querySelector(".list-tasks");
         const textInput = document.createElement("input");
         textInput.setAttribute("class", "form-control value-task");
         textInput.type = "text";
@@ -47,6 +49,8 @@ handleAddTodo = () => {
 //Function delete task
 handleDeleteTodo = task => {
     task.parentNode.remove();
+    let count = listTask.children.length;
+    messageCount.innerHTML = `Il y'a actuellement <span style='color:green;fontWeight:bold'>${count}</span> tâche(s) !`;
 };
 
 //Function check task
@@ -64,24 +68,34 @@ handleCheckTodo = inputCheckbox => {
 //Function display task
 handleDisplayTodo = (parent, item) => {
     parent.appendChild(item);
+    //Get number of item and display this
+    let count = parent.children.length;
+    messageCount.innerHTML = `Il y'a actuellement <span style='color:green;fontWeight:bold'>${count}</span> tâche(s) !`;
 };
 
 //Function FilterAll
 handleFilterAll = () => {
     const tasks = document.querySelectorAll(".value-task");
+    let count = 0;
     for (let i = 0; i < tasks.length; i++) {
         tasks[i].parentNode.style.display = "flex";
+        count++
     }
+    messageCount.innerHTML = `Il y'a actuellement <span style='color:green;fontWeight:bold'>${count}</span> tâche(s) !`;
 };
 
 //Function FilterCompleted
 handleFilterCompleted = () => {
     const tasks = document.querySelectorAll(".value-task");
+    let count = 0;
     for (let i = 0; i < tasks.length; i++) {
         if (!tasks[i].classList.contains("line-checkbox")) {
             tasks[i].parentNode.style.display = "none";
+        } else {
+            count++;
         }
     }
+    messageCount.innerHTML = `Il y'a actuellement <span style='color:green;fontWeight:bold'>${count}</span> tâche(s) !`;
 };
 
 
