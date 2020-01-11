@@ -10,7 +10,34 @@ section#main {
     text-align: center; }
   section#main .todo {
     max-width: 500px;
+    height: 500px;
+    overflow-y: scroll;
     margin: 100px auto;
     border: 1px solid #b9b8b8;
-    background-color: #e9e8e8;
+    background-color: #f0efef;
     padding: 30px; }
+    section#main .todo .input-todo {
+      display: flex; }
+    section#main .todo .form-control {
+      border-radius: 0;
+      height: 45px; }
+      section#main .todo .form-control:active, section#main .todo .form-control:focus {
+        outline: none;
+        border-color: #b9b8b8;
+        box-shadow: none; }
+    section#main .todo .btn {
+      border-radius: 0; }
+      section#main .todo .btn:active, section#main .todo .btn:focus {
+        outline: none;
+        box-shadow: none; }
+    section#main .todo .list-tasks {
+      margin-top: 30px;
+      padding: 0; }
+      section#main .todo .list-tasks .item-task {
+        display: flex;
+        list-style: none;
+        margin-top: 20px; }
+        section#main .todo .list-tasks .item-task .js-checkbox-task {
+          width: 10%; }
+        section#main .todo .list-tasks .item-task .btn-delete-task {
+          margin-left: 20px; }

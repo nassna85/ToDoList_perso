@@ -15,9 +15,45 @@ section#main {
     }
     .todo {
         max-width: 500px;
+        height: 500px;
+        overflow-y: scroll;
         margin: 100px auto;
         border: 1px solid rgb(185, 184, 184);
-        background-color: rgb(233, 232, 232);
+        background-color: rgb(240, 239, 239);
         padding: 30px;
+        .input-todo {
+            display: flex;
+        }
+        .form-control {
+            border-radius: 0;
+            height: 45px;
+            &:active,&:focus {
+                outline: none;
+                border-color: rgb(185, 184, 184);
+                box-shadow: none;
+            }
+        }
+        .btn {
+            border-radius: 0;
+            &:active,&:focus {
+                outline: none;
+                box-shadow: none;
+            }
+        }
+        .list-tasks {
+            margin-top: 30px;
+            padding: 0;
+            .item-task {
+                display: flex;
+                list-style: none;
+                margin-top: 20px;
+                .js-checkbox-task {
+                    width: 10%;
+                }
+                .btn-delete-task {
+                    margin-left: 20px;
+                }
+            }
+        }
     }
 }
