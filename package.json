@@ -1,0 +1,17 @@
+{
+  "name": "todolist-personnel",
+  "version": "1.0.0",
+  "description": "TodoList in Javascript",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build-scss": "node-sass --include scss assets/scss/style.scss assets/css/style.css",
+    "watch": "nodemon -e scss -x \"npm run build-scss\""
+  },
+  "author": "Naïm Elmaftouhi",
+  "license": "ISC",
+  "devDependencies": {
+    "node-sass": "^4.13.0",
+    "nodemon": "^2.0.2"
+  }
+}
