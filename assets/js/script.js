@@ -50,7 +50,7 @@ handleAddTodo = () => {
 handleDeleteTodo = task => {
     task.parentNode.remove();
     let count = listTask.children.length;
-    messageCount.innerHTML = `Il y'a actuellement <span style='color:green;fontWeight:bold'>${count}</span> tâche(s) !`;
+    messageCount.innerHTML = `There is/are currently <span style='color:green;fontWeight:bold'>${count}</span> task(s) !`;
 };
 
 //Function check task
@@ -70,7 +70,7 @@ handleDisplayTodo = (parent, item) => {
     parent.appendChild(item);
     //Get number of item and display this
     let count = parent.children.length;
-    messageCount.innerHTML = `Il y'a actuellement <span style='color:green;fontWeight:bold'>${count}</span> tâche(s) !`;
+    messageCount.innerHTML = `There is/are currently <span style='color:green;fontWeight:bold'>${count}</span> task(s) !`;
 };
 
 //Function FilterAll
@@ -81,7 +81,7 @@ handleFilterAll = () => {
         tasks[i].parentNode.style.display = "flex";
         count++
     }
-    messageCount.innerHTML = `Il y'a actuellement <span style='color:green;fontWeight:bold'>${count}</span> tâche(s) !`;
+    messageCount.innerHTML = `There is/are currently <span style='color:green;fontWeight:bold'>${count}</span> task(s) !`;
 };
 
 //Function FilterCompleted
@@ -95,7 +95,7 @@ handleFilterCompleted = () => {
             count++;
         }
     }
-    messageCount.innerHTML = `Il y'a actuellement <span style='color:green;fontWeight:bold'>${count}</span> tâche(s) !`;
+    messageCount.innerHTML = `There is/are currently <span style='color:green;fontWeight:bold'>${count}</span> task(s) completed !`;
 };
 
 
