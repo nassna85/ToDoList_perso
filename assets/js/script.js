@@ -4,8 +4,6 @@ const btnAddTask = document.querySelector("#js-btn-add-task");
 const btnFilterAll = document.getElementById("js-filter-all");
 const btnFilterCompleted = document.getElementById("js-filter-completed");
 const messageCount = document.querySelector(".message-count");
-//const btnDeleteTask = document.querySelectorAll("button.btn-delete-task");
-//const inputCheckbox = document.querySelectorAll(".js-checkbox-task");
 
 //Function Add Task
 handleAddTodo = () => {
@@ -37,8 +35,10 @@ handleAddTodo = () => {
         liElement.appendChild(checkBoxElement);
         liElement.appendChild(textInput);
         liElement.appendChild(btnDeleteElement);
-        //listTask.appendChild(liElement);
+
         handleDisplayTodo(listTask, liElement);
+
+        //Reset field input task
         inputTask.value = "";
     } else {
         messageError.style.display = "block";
@@ -123,12 +123,5 @@ btnFilterAll.addEventListener("click", handleFilterAll);
 
 //Click on filterCompleted
 btnFilterCompleted.addEventListener("click", handleFilterCompleted);
-
-//Click in deleteTask Button
-/*
-btnDeleteTask.forEach(btn => {
-    btn.addEventListener("click", handleDeleteTodo);
-});
-*/
 
 
