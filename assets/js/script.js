@@ -46,11 +46,16 @@ handleAddTodo = () => {
 
 };
 
+//Function display count task
+handleDisplayCount = count => {
+    messageCount.innerHTML = `There is/are currently <span style='color:green;fontWeight:bold'>${count}</span> task(s) !`;
+};
+
 //Function delete task
 handleDeleteTodo = task => {
     task.parentNode.remove();
     let count = listTask.children.length;
-    messageCount.innerHTML = `There is/are currently <span style='color:green;fontWeight:bold'>${count}</span> task(s) !`;
+    handleDisplayCount(count);
 };
 
 //Function check task
@@ -70,7 +75,7 @@ handleDisplayTodo = (parent, item) => {
     parent.appendChild(item);
     //Get number of item and display this
     let count = parent.children.length;
-    messageCount.innerHTML = `There is/are currently <span style='color:green;fontWeight:bold'>${count}</span> task(s) !`;
+    handleDisplayCount(count);
 };
 
 //Function FilterAll
@@ -83,7 +88,7 @@ handleFilterAll = () => {
         tasks[i].nextElementSibling.style.display = "block";
         count++
     }
-    messageCount.innerHTML = `There is/are currently <span style='color:green;fontWeight:bold'>${count}</span> task(s) !`;
+    handleDisplayCount(count);
 };
 
 //Function FilterCompleted
@@ -99,7 +104,7 @@ handleFilterCompleted = () => {
             count++;
         }
     }
-    messageCount.innerHTML = `There is/are currently <span style='color:green;fontWeight:bold'>${count}</span> task(s) completed !`;
+    handleDisplayCount(count);
 };
 
 
