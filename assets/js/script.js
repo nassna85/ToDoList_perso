@@ -4,33 +4,68 @@ const btnAddTask = document.querySelector("#js-btn-add-task");
 const btnFilterAll = document.getElementById("js-filter-all");
 const btnFilterCompleted = document.getElementById("js-filter-completed");
 const messageCount = document.querySelector(".message-count");
+const btnClearAllTasks = document.getElementById("js-clear-all-tasks");
+//Test count tasks in localstorage for display message directly in homepage
+//let count = localStorage.length;
+//console.log(count);
 
 //Function Add Task
 handleAddTodo = () => {
     const valueTask = inputTask.value;
     const messageError = document.querySelector(".message-error");
     if (valueTask !== "") {
+        //Value not empty ? hide the message error
         messageError.style.display = "none";
-        //const listTask = document.querySelector(".list-tasks");
-        const textInput = document.createElement("input");
-        textInput.setAttribute("class", "form-control value-task");
-        textInput.type = "text";
-        textInput.value = valueTask;
 
+        //Create li element and config attribute
         const liElement = document.createElement("li");
         liElement.setAttribute("class", "item-task align-items-center");
 
+        //Create input checkbox element and config attribute
         const checkBoxElement = document.createElement('input');
-        checkBoxElement.setAttribute("class", "form-control js-checkbox-task");
-        checkBoxElement.setAttribute("onclick", "handleCheckTodo(this)");
-        checkBoxElement.type = "checkbox";
+        //Attribute class
+        const attrClassCheckbox = document.createAttribute("class");
+        attrClassCheckbox.value = "form-control js-checkbox-task";
+        checkBoxElement.setAttributeNode(attrClassCheckbox);
+        //Attribute onclick
+        const attrOnClickCheckbox = document.createAttribute("onclick");
+        attrOnClickCheckbox.value = "handleCheckTodo(this)";
+        checkBoxElement.setAttributeNode(attrOnClickCheckbox);
+        //Attribute Type
+        const attrTypeCheckbox = document.createAttribute("type");
+        attrTypeCheckbox.value = "checkbox";
+        checkBoxElement.setAttributeNode(attrTypeCheckbox);
 
+        //Create input text element and config attribute
+        const textInput = document.createElement("input");
+        //Attribute class
+        const attrClassTextInput = document.createAttribute("class");
+        attrClassTextInput.value = "form-control value-task";
+        textInput.setAttributeNode(attrClassTextInput);
+        //Attribute Type
+        textInput.type = "text";
+        //Attribute value
+        const attrValueTextInput = document.createAttribute("value");
+        attrValueTextInput.value = valueTask;
+        textInput.setAttributeNode(attrValueTextInput);
+
+        //Create i element and config attribute
         const valueBtnDelete = document.createElement("i");
-        valueBtnDelete.setAttribute("class", "fas fa-trash");
+        //Attribute class
+        const attrClassI = document.createAttribute("class");
+        attrClassI.value = "fas fa-trash";
+        valueBtnDelete.setAttributeNode(attrClassI);
+        //Create button delete element and config attribute
         const btnDeleteElement = document.createElement("button");
+        //Attribute class
+        const attrClassButtonDelete = document.createAttribute("class");
+        attrClassButtonDelete.value = "btn btn-danger btn-delete-task";
+        btnDeleteElement.setAttributeNode(attrClassButtonDelete);
+        //Attribute onclick
+        const attrOnClickButtonDelete = document.createAttribute("onclick");
+        attrOnClickButtonDelete.value = "handleDeleteTodo(this)";
+        btnDeleteElement.setAttributeNode(attrOnClickButtonDelete);
         btnDeleteElement.appendChild(valueBtnDelete);
-        btnDeleteElement.setAttribute("class", "btn btn-danger btn-delete-task");
-        btnDeleteElement.setAttribute("onclick", "handleDeleteTodo(this)");
 
         liElement.appendChild(checkBoxElement);
         liElement.appendChild(textInput);
@@ -49,6 +84,7 @@ handleAddTodo = () => {
 
 };
 
+//Get items from localstorage
 const saved = localStorage.getItem("listTasks");
 if (saved) {
     listTask.innerHTML = saved;
@@ -72,8 +108,12 @@ handleCheckTodo = inputCheckbox => {
     element.classList.toggle("line-checkbox");
     if (element.classList.contains("line-checkbox")) {
         element.disabled = true;
+        inputCheckbox.setAttribute("checked", true);
+        localStorage.setItem("listTasks", listTask.innerHTML);
     } else {
         element.disabled = false;
+        inputCheckbox.removeAttribute("checked");
+        localStorage.setItem("listTasks", listTask.innerHTML);
     }
 
 };
@@ -115,6 +155,19 @@ handleFilterCompleted = () => {
     handleDisplayCount(count);
 };
 
+//Function Clear All TAsks
+handleClearAllTasks = () => {
+    const tasks = listTask.children;
+    while (tasks.length > 0) {
+        tasks[0].remove();
+    }
+    messageCount.innerHTML = "There is/are currently <span style='color:green;fontWeight:bold'>0</span> task(s) !";
+    localStorage.clear();
+};
+
+//TEST AFFICHAGE DU COMPTEUR DES LE RECHARGEMENT DE LA PAGE
+//handleDisplayCount(count);
+
 
 //Click on addTask Button
 btnAddTask.addEventListener("click", handleAddTodo);
@@ -131,5 +184,8 @@ btnFilterAll.addEventListener("click", handleFilterAll);
 
 //Click on filterCompleted
 btnFilterCompleted.addEventListener("click", handleFilterCompleted);
+
+//Click on ClearAllTAsks button
+btnClearAllTasks.addEventListener("click", handleClearAllTasks);
 
 
