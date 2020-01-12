@@ -40,11 +40,19 @@ handleAddTodo = () => {
 
         //Reset field input task
         inputTask.value = "";
+
+        //Save localstorage
+        localStorage.setItem("listTasks", listTask.innerHTML);
     } else {
         messageError.style.display = "block";
     }
 
 };
+
+const saved = localStorage.getItem("listTasks");
+if (saved) {
+    listTask.innerHTML = saved;
+}
 
 //Function display count task
 handleDisplayCount = count => {
